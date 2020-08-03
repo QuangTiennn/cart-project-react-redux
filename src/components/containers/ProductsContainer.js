@@ -39,13 +39,13 @@ ProductsContainer.propTypes = {
             id : PropTypes.number.isRequired,
             name : PropTypes.string.isRequired,
             img : PropTypes.string.isRequired,
-            description : PropTypes.string.isRequired,
+            description : PropTypes.string,
             price : PropTypes.number.isRequired,
             inventory : PropTypes.number.isRequired,
             rating : PropTypes.number.isRequired
         })
     ).isRequired,
-    onChangMessage : PropTypes.func.isRequired
+    onChangMessage : PropTypes.func
 }
 
 const mapStateToProps = (state) => {

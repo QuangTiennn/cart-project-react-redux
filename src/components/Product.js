@@ -32,7 +32,7 @@ class Product extends Component {
                             <span className="left">{ product.price }$</span>
                             <span className="right">
                                 <a 
-                                    href='/#' 
+                                    href='/#'
                                     className="btn-floating blue-gradient" 
                                     data-toggle="tooltip" 
                                     data-placement="top" 

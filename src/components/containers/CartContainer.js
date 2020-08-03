@@ -6,6 +6,7 @@ import * as Message from '../constants/Message';
 import CartItem from '../CartItem';
 import Cart from '../Cart';
 import CartResult from './../CartResult';
+import * as actions from '../actions/index';
 
 class CartContainer extends Component {
     render(){
@@ -18,6 +19,7 @@ class CartContainer extends Component {
         )
     }
     showCartItem = (cart) => {
+        var { onDeleteProductInCart } = this.props;
         var result = <tr>
                         <td>
                             {Message.MSG_CART_EMPTY}
@@ -30,6 +32,7 @@ class CartContainer extends Component {
                         key={index}
                         item={item}            //item la sp va soluong mua  
                         index={index}
+                        onDeleteProductInCart = {onDeleteProductInCart}
                     />
                 );
             })
@@ -66,6 +69,14 @@ const mapStateToProps = (state) => {
     return {
         cart : state.cart                      //props la cart => cac sp trong gio hang
     }
-}
+};
 
-export default connect(mapStateToProps,null)(CartContainer);
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        onDeleteProductInCart : (product) => {                    //props tham so la product
+            dispatch(actions.actDeleteProductInCart(product))
+        }
+    }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(CartContainer);
