@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 
-
+import * as Message from '../components/constants/Message';
 class CartItem extends Component {
     render(){
         var { item } = this.props;
+        var { quantity } = item;
         return (
             <tr>
                 <th scope="row">
@@ -17,14 +18,18 @@ class CartItem extends Component {
                 </td>
                 <td>{item.product.price}$</td>
                 <td className="center-on-small-only">
-                        <span className="qty">{item.quantity}</span>
+                        <span className="qty">{quantity}</span>
                     <div className="btn-group radio-group" data-toggle="buttons">
-                        <label className="btn btn-sm btn-primary
-                            btn-rounded waves-effect waves-light">
+                        <label 
+                            className="btn btn-sm btn-primary btn-rounded waves-effect waves-light"
+                            onClick = {()=> {this.onUpdateQuantity(item.product, item.quantity - 1)}}
+                        >
                             <a href='/#'>—</a>
                         </label>
-                        <label className="btn btn-sm btn-primary
-                            btn-rounded waves-effect waves-light">
+                        <label 
+                            className="btn btn-sm btn-primary btn-rounded waves-effect waves-light"
+                            onClick = {()=> {this.onUpdateQuantity(item.product, item.quantity + 1)}}
+                        >
                             <a href='/#'>+</a>
                         </label>
                     </div>
@@ -51,8 +56,17 @@ class CartItem extends Component {
     }
     
     onDelete = (product) => {        //truyen props de dispatch 1 action
-        var { onDeleteProductInCart } = this.props;
+        var { onDeleteProductInCart, onChangeMessage} = this.props;
         onDeleteProductInCart(product);
+        onChangeMessage(Message.MSG_DELETE_CART_SUCCES);
+    }
+
+    onUpdateQuantity = (product, quantity) => {
+        var { onUpdateProductInCart, onChangeMessage } = this.props;
+        if(quantity > 0){
+            onUpdateProductInCart(product, quantity);
+            onChangeMessage(Message.MSG_UPDATE_CART_SUCCES);    
+        }
     }
 }
 export default CartItem;
