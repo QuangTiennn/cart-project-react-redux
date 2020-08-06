@@ -34,7 +34,7 @@ class CartItem extends Component {
                         </label>
                     </div>
                 </td>
-                <td>{this.showSubTotal(item.product.price,item.quantity)}$</td>
+                <td>{this.showSubTotal(item.product.price, item.quantity)}$</td>
                 <td>
                     <button 
                         className="btn btn-sm btn-primary waves-effect waves-light" 
@@ -69,4 +69,5 @@ class CartItem extends Component {
         }
     }
 }
+
 export default CartItem;
